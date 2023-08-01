@@ -6,7 +6,7 @@
                         <img alt="logo" src="../assets/logo.png" height="24" class="mr-2" />
                   </template>
                   <template #end>
-                        <Button label="Start" icon="pi pi-user" iconPos="right" style="border-radius: 22px;" />
+                        <Button label="Start" icon="pi pi-user" iconPos="right" style="border-radius: 22px;" v-on:click="$router.push('/signin')" />
                   </template>
             </MegaMenu>
       </div>

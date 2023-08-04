@@ -7,6 +7,9 @@
                                     <img src="../assets/american.png" alt="american airlines">
                               </div>
                               <div class="flex flex-1 gap-10">
+                                    <small>{{ departure }}</small>
+                              </div>
+                              <div class="flex flex-1 gap-10">
                                     <h2>{{ startHour }}</h2>
                               </div>
                               <div class="flex flex-1 gap-10">
@@ -16,13 +19,16 @@
                                     <small>{{ duration }}</small>
                               </div>
                               <div class="flex flex-1 gap-10">
+                                    <small>{{ arrive }}</small>
+                              </div>
+                              <div class="flex flex-1 gap-10">
                                     <h2>{{ finishHour }}</h2>
                               </div>
                               <div class="flex flex-1 gap-10">
                                     <h2>{{ destiny }}</h2>
                               </div>
                               <div class="flex flex-1 gap-10">
-                                    <h2>COP $500.000</h2>
+                                    <h2>COP ${{ calculatedPrice }}</h2>
                               </div>
                               <div class="flex flex-1 gap-10">
                                     <small>{{ isDirect ? "Direct":"With Scales" }}</small>
@@ -35,7 +41,7 @@
 
 <script>
 export default {
-      props:['startHour','finishHour', 'origin', 'destiny', 'duration', 'isDirect'],
+      props:['startHour','finishHour', 'origin', 'destiny', 'duration', 'isDirect', 'calculatedPrice', 'departure', 'arrive'],
       data() {
             return {
                   

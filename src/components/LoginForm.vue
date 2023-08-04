@@ -2,13 +2,14 @@
       <Card id="leftCard">
             <template #content>
                   <h2 style="padding: 20px">Sign In</h2>
-                  <form style="padding: 20px">
+                  <form style="padding: 20px" v-on:submit.prevent="login">
                         <label>Email</label><br />
                         <InputText
                               type="email"
                               placeholder="Email"
                               aria-describedby="username-help"
                               style="border-radius: 22px"
+                              v-model="email"
                         />
                         <br /><br />
                         <label>Password</label><br />
@@ -17,6 +18,7 @@
                               placeholder="password"
                               aria-describedby="username-help"
                               style="border-radius: 22px"
+                              v-model="password"
                         />
                         <br /><br />
                         <a href="#" style="text-decoration: none; color: gray"
@@ -25,6 +27,7 @@
                         <Button
                               label="Sign In"
                               style="border-radius: 22px"
+                              type="submit"
                         ></Button
                         ><br /><br />
                         <router-link
@@ -36,6 +39,41 @@
             </template>
       </Card>
 </template>
+
+<script>
+import axios from "axios"
+import Swal from 'sweetalert2'
+
+export default {
+      data() {
+            return {
+                  email: "",
+                  password:""
+            }
+      },
+      methods: {
+            async login() {
+                  const data = {
+                        email: this.email,
+                        password: this.password
+                  }
+
+                  const request = await axios.post(`${import.meta.env.VITE_BACK_URI}/auth/login`, data)
+                  if (request.data!="") {
+                        localStorage.setItem("userSession", request.data)
+                        this.$router.push("/app")
+                  } else {
+                        Swal.fire({
+                              title: 'Upps!',
+                              text: 'Incorrect credentials',
+                              icon: 'error',
+                              confirmButtonText: 'Try again'
+                        })
+                  }
+            }
+      },
+}
+</script>
 
 <style scoped>
 #leftCard {

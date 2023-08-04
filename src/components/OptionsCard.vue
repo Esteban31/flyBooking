@@ -36,7 +36,7 @@
                               <InputText
                                     id="username"
                                     type="number"
-                                    placeholder="Boys"
+                                    placeholder="Children"
                                     aria-describedby="username-help"
                                     v-model="FlyOptions.boys"
                               />
@@ -51,6 +51,7 @@
                                     optionLabel="name"
                                     placeholder="Select a Origin"
                                     class="w-full md:w-14rem"
+                                    :options="origins"
                                     v-model="FlyOptions.origin"
                               />
                         </div>
@@ -59,6 +60,7 @@
                                     optionLabel="name"
                                     placeholder="Select Destiny"
                                     class="w-full md:w-14rem"
+                                    :options="destiny"
                                     v-model="FlyOptions.destiny"
                               />
                         </div>
@@ -117,32 +119,34 @@ export default {
             return {
                   option: "",
                   value: "",
+                  origins: [{ "name": "MDE", "code": "MDE" }, { "name": "BGO", "code": "BGO" }],
+                  destiny:[{"name":"MDE", "code": "MDE"}, {"name":"BGO", "code": "BGO"}],
                   FlyOptions: {
                         flyType: 0,
-                        passangers: 1,
-                        boys: 0,
+                        passangers: "",
+                        boys: "",
                         origin: "",
                         destiny: "",
                         departureDate: "",
                         arriveDate: "",
                   },
                   results: [
-                        {
-                              startHour: "10:26 AM",
-                              finishHour: "13:45 PM",
-                              origin: "EOH",
-                              destiny: "BOG",
-                              duration: "2 hour",
-                              isDirect: true,
-                        },
-                        {
-                              startHour: "11:00 AM",
-                              finishHour: "13:45 PM",
-                              origin: "BOG",
-                              destiny: "MED",
-                              duration: "50 min",
-                              isDirect: false,
-                        },
+                        // {
+                        //       startHour: "10:26 AM",
+                        //       finishHour: "13:45 PM",
+                        //       origin: "EOH",
+                        //       destiny: "BOG",
+                        //       duration: "2 hour",
+                        //       isDirect: true,
+                        // },
+                        // {
+                        //       startHour: "11:00 AM",
+                        //       finishHour: "13:45 PM",
+                        //       origin: "BOG",
+                        //       destiny: "MED",
+                        //       duration: "50 min",
+                        //       isDirect: false,
+                        // },
                   ],
             };
       },

@@ -6,14 +6,22 @@
                         <img alt="logo" src="../assets/logo.png" height="24" class="mr-2" />
                   </template>
                   <template #end>
-                        <Button label="Start" icon="pi pi-user" iconPos="right" style="border-radius: 22px;" v-on:click="$router.push('/signin')" />
+                        <Button v-if="userSession===''" label="Start" icon="pi pi-user" iconPos="right" style="border-radius: 22px;" v-on:click="$router.push('/signin')" />
+                        <Button v-if="userSession && $router.currentRoute.value.fullPath === '/app'" label="Bookings" style="border-radius: 22px;" v-on:click="$router.push('/booking')" />
+                        <Button v-if="userSession && $router.currentRoute.value.fullPath === '/booking'" label="Search Flights" style="border-radius: 22px;" v-on:click="$router.push('/app')" />
                   </template>
             </MegaMenu>
       </div>
   </template>
   
-  <script setup>
-  
+  <script>
+  export default {
+      data() {
+            return {
+                  userSession: localStorage.getItem('userSession')
+            }
+      }
+  }
   </script>
 
 <style scoped>

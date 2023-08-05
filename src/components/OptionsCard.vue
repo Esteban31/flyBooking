@@ -192,43 +192,52 @@ export default {
                               : moment().format("YYYY-MM-DD"),
                   };
 
-                  const request = await axios.post(
-                        `${import.meta.env.VITE_BACK_URI}/flight/search`,
-                        data
-                  );
-
-                  this.results = [];
-
-                  if (request.data.destiny === null) {
+                  if (this.FlyOptions.passangers === "") {
                         Swal.fire({
                               title: "Upps!",
-                              text: "No flights available in this search",
+                              text: "You must be assign the passangers number",
                               icon: "info",
                               confirmButtonText: "Search again",
                         });
                   } else {
-                        request.data.forEach((element) => {
-                              let calcP =
-                                    this.FlyOptions.passangers *
-                                    element.price_per_passanger;
-                              let calcC =
-                                    this.FlyOptions.boys *
-                                    element.price_per_child;
-                              const total = calcP + calcC;
+                        const request = await axios.post(
+                              `${import.meta.env.VITE_BACK_URI}/flight/search`,
+                              data
+                        );
 
-                              this.results.push({
-                                    startHour: "11:00 AM",
-                                    finishHour: "13:45 PM",
-                                    origin: element.origin,
-                                    destiny: element.destiny,
-                                    duration: "50 min",
-                                    isDirect: element.is_direct,
-                                    calculatedPrice: total,
-                                    departure: element.departure,
-                                    arrive: element.arrive,
-                                    id: element.id,
+                        this.results = [];
+
+                        if (request.data.destiny === null) {
+                              Swal.fire({
+                                    title: "Upps!",
+                                    text: "No flights available in this search",
+                                    icon: "info",
+                                    confirmButtonText: "Search again",
                               });
-                        });
+                        } else {
+                              request.data.forEach((element) => {
+                                    let calcP =
+                                          this.FlyOptions.passangers *
+                                          element.price_per_passanger;
+                                    let calcC =
+                                          this.FlyOptions.boys *
+                                          element.price_per_child;
+                                    const total = calcP + calcC;
+
+                                    this.results.push({
+                                          startHour: "11:00 AM",
+                                          finishHour: "13:45 PM",
+                                          origin: element.origin,
+                                          destiny: element.destiny,
+                                          duration: "50 min",
+                                          isDirect: element.is_direct,
+                                          calculatedPrice: total,
+                                          departure: element.departure,
+                                          arrive: element.arrive,
+                                          id: element.id,
+                                    });
+                              });
+                        }
                   }
             },
             changeFlightType(type) {

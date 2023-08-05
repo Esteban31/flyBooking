@@ -27,7 +27,7 @@
                               <div class="flex flex-1 gap-10">
                                     <h2>{{ destiny }}</h2>
                               </div>
-                              <div class="flex flex-1 gap-10">
+                              <div class="flex flex-1 gap-10" v-if="calculatedPrice>0">
                                     <h2>COP ${{ calculatedPrice }}</h2>
                               </div>
                               <div class="flex flex-1 gap-10">

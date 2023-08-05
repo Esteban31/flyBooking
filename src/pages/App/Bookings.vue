@@ -2,18 +2,19 @@
       <div class="container">
             <TopNav/>
             <!-- <OptionsCard/> -->
-            <flightCard
-                  v-for="result in results"
-                  :startHour="result.startHour"
-                  :finishHour="result.finishHour"
-                  :origin="result.origin"
-                  :destiny="result.destiny"
-                  :duration="result.duration"
-                  :isDirect="result.isDirect"
-                  :calculatedPrice="result.calculatedPrice"
-                  :departure="result.departure"
-                  :arrive="result.arrive"
-            />    
+            <a href="#" v-for="result in results" style="text-decoration: none;" v-on:click="deleteBook(result.flight_id)">
+                  <flightCard
+                        :startHour="result.startHour"
+                        :finishHour="result.finishHour"
+                        :origin="result.origin"
+                        :destiny="result.destiny"
+                        :duration="result.duration"
+                        :isDirect="result.isDirect"
+                        :calculatedPrice="result.calculatedPrice"
+                        :departure="result.departure"
+                        :arrive="result.arrive"
+                  />    
+            </a>
             <div class="empty-results" v-if="results.length<1">
                   <center>
                         <img src="../../assets/empty-results.png" alt="" />
@@ -43,8 +44,6 @@ export default {
                   const userId = localStorage.getItem("userSession")
                   const request = await axios.get(`${import.meta.env.VITE_BACK_URI}/booking/bookings/${userId}`)
 
-                  console.log(request.data)
-
                   request.data.forEach(element => {
                         this.results.push({
                               startHour: "11:00 AM",
@@ -59,6 +58,9 @@ export default {
                               id: element.id,
                         });
                   });
+            },
+            deleteBook(id) {
+                  // alert(id)
             }
       },
       mounted() {

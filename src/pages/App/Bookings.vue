@@ -61,10 +61,16 @@ export default {
             },
             deleteBook(id) {
                   // alert(id)
+            },
+            checkSession() {
+                  if (localStorage.getItem("userSession")==undefined) {
+                        this.$router.push("/signin")
+                  }
             }
       },
       mounted() {
             this.getBookings()
+            this.checkSession()
       },
 }
 </script>+

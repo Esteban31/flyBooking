@@ -10,6 +10,16 @@ import TopNav from '../../components/TopNav.vue';
 import OptionsCard from '../../components/OptionsCard.vue';
 
 export default {
-      components:{TopNav, OptionsCard}
+      components: { TopNav, OptionsCard },
+      methods: {
+            checkSession() {
+                  if (localStorage.getItem("userSession")==undefined) {
+                        this.$router.push("/signin")
+                  }
+            }
+      },
+      mounted() {
+            this.checkSession()
+      },
 }
 </script>

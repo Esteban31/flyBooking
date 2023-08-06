@@ -2,96 +2,48 @@
       <Card id="optionsCard">
             <template #title>Choose Options to find the best Flight</template>
             <template #content>
-                  <div
-                        class="flex flex-column md:flex-row md:justify-content-between row-gap-3"
-                  >
+                  <div class="flex flex-column md:flex-row md:justify-content-between row-gap-3">
                         <div class="p-inputgroup flex-1">
-                              <RadioButton
-                                    v-model="FlyOptions.flyType"
-                                    inputId="oneWay"
-                                    value="oneWay"
-                                    style="margin-right: 10px"
-                                    v-on:change="changeFlightType('oneWay')"
-                              />
+                              <RadioButton v-model="FlyOptions.flyType" inputId="oneWay" value="oneWay"
+                                    style="margin-right: 10px" v-on:change="changeFlightType('oneWay')" />
                               <label for="ingredient1">One Way</label>
                         </div>
                         <div class="p-inputgroup flex-1">
-                              <RadioButton
-                                    v-model="FlyOptions.flyType"
-                                    inputId="roundTrip"
-                                    value="roundTrip"
-                                    style="margin-right: 10px"
-                                    v-on:change="changeFlightType('roundTrip')"
-                              />
+                              <RadioButton v-model="FlyOptions.flyType" inputId="roundTrip" value="roundTrip"
+                                    style="margin-right: 10px" v-on:change="changeFlightType('roundTrip')" />
                               <label for="ingredient1">Round Trip</label>
                         </div>
                         <div class="flex flex-1 gap-10">
-                              <InputText
-                                    id="username"
-                                    type="number"
-                                    placeholder="Passangers"
-                                    aria-describedby="username-help"
-                                    v-model="FlyOptions.passangers"
-                              />
+                              <InputText id="username" type="number" placeholder="Passangers" aria-describedby="username-help"
+                                    v-model="FlyOptions.passangers" />
                         </div>
                         <div class="flex flex-1 gap-10">
-                              <InputText
-                                    id="username"
-                                    type="number"
-                                    placeholder="Children"
-                                    aria-describedby="username-help"
-                                    v-model="FlyOptions.boys"
-                              />
+                              <InputText id="username" type="number" placeholder="Children" aria-describedby="username-help"
+                                    v-model="FlyOptions.boys" />
                         </div>
                   </div>
                   <br />
-                  <div
-                        class="flex flex-column md:flex-row md:justify-content-between row-gap-3"
-                  >
+                  <div class="flex flex-column md:flex-row md:justify-content-between row-gap-3">
                         <div class="flex flex-1 gap-10">
-                              <Dropdown
-                                    optionLabel="name"
-                                    placeholder="Select a Origin"
-                                    class="w-full md:w-14rem"
-                                    :options="origins"
-                                    v-model="FlyOptions.origin"
-                              />
+                              <Dropdown optionLabel="name" placeholder="Select a Origin" class="w-full md:w-14rem"
+                                    :options="origins" v-model="FlyOptions.origin" />
                         </div>
                         <div class="flex flex-1 gap-10">
-                              <Dropdown
-                                    optionLabel="name"
-                                    placeholder="Select Destiny"
-                                    class="w-full md:w-14rem"
-                                    :options="destiny"
-                                    v-model="FlyOptions.destiny"
-                              />
+                              <Dropdown optionLabel="name" placeholder="Select Destiny" class="w-full md:w-14rem"
+                                    :options="destiny" v-model="FlyOptions.destiny" />
                         </div>
                         <div class="flex flex-1 gap-10">
-                              <Calendar
-                                    dateFormat="yy-mm-dd"
-                                    placeholder="Departure date"
-                                    v-model="FlyOptions.departureDate"
-                              />
+                              <Calendar dateFormat="yy-mm-dd" placeholder="Departure date"
+                                    v-model="FlyOptions.departureDate" />
                         </div>
-                        <div
-                              class="flex flex-1 gap-10"
-                              v-if="flyType != 'oneWay'"
-                        >
-                              <Calendar
-                                    dateFormat="yy-mm-dd"
-                                    placeholder="Arrive date"
-                                    v-model="FlyOptions.arriveDate"
-                              />
+                        <div class="flex flex-1 gap-10" v-if="flyType != 'oneWay'">
+                              <Calendar dateFormat="yy-mm-dd" placeholder="Arrive date" v-model="FlyOptions.arriveDate" />
                         </div>
                   </div>
                   <br />
                   <center>
-                        <Button
-                              label="Search Flighs"
-                              style="border-radius: 22px"
-                              type="button"
-                              v-on:click="searchFlight"
-                        ></Button>
+                        <Button label="Search Flighs" style="border-radius: 22px" type="button"
+                              v-on:click="searchFlight"></Button>
                   </center>
             </template>
       </Card>
@@ -106,23 +58,11 @@
                   </h6>
             </center>
       </div>
-      <a
-            href="#"
-            v-for="result in results"
-            style="text-decoration: none"
-            v-on:click="book(result.id, result.calculatedPrice)"
-      >
-            <flightCard
-                  :startHour="result.startHour"
-                  :finishHour="result.finishHour"
-                  :origin="result.origin"
-                  :destiny="result.destiny"
-                  :duration="result.duration"
-                  :isDirect="result.isDirect"
-                  :calculatedPrice="result.calculatedPrice"
-                  :departure="result.departure"
-                  :arrive="result.arrive"
-            />
+      <a href="#" v-for="result in results" style="text-decoration: none"
+            v-on:click="book(result.id, result.calculatedPrice)">
+            <flightCard :startHour="result.startHour" :finishHour="result.finishHour" :origin="result.origin"
+                  :destiny="result.destiny" :duration="result.duration" :isDirect="result.isDirect"
+                  :calculatedPrice="result.calculatedPrice" :departure="result.departure" :arrive="result.arrive" />
       </a>
 </template>
 
@@ -182,13 +122,13 @@ export default {
                         destiny: this.FlyOptions.destiny.code,
                         departure: this.FlyOptions.departureDate
                               ? moment(this.FlyOptions.departureDate).format(
-                                      "YYYY-MM-DD"
-                                )
+                                    "YYYY-MM-DD"
+                              )
                               : moment().format("YYYY-MM-DD"),
                         arrive: this.FlyOptions.arriveDate
                               ? moment(this.FlyOptions.arriveDate).format(
-                                      "YYYY-MM-DD"
-                                )
+                                    "YYYY-MM-DD"
+                              )
                               : moment().format("YYYY-MM-DD"),
                   };
 
@@ -255,32 +195,41 @@ export default {
                         confirmButtonText: "Yes, book",
                   }).then(async (result) => {
                         if (result.isConfirmed) {
-                              const data = {
-                                    passangers: this.FlyOptions.passangers,
-                                    children: this.FlyOptions.boys
-                                          ? this.FlyOptions.boys
-                                          : 0,
-                                    total_payed: payed,
-                                    user_id: localStorage.getItem(
-                                          "userSession"
-                                    ),
-                                    flight_id: id,
-                              };
 
-                              const request = await axios.post(
-                                    `${
-                                          import.meta.env.VITE_BACK_URI
-                                    }/booking/create`,
-                                    data
-                              );
-
-                              if (request.data.passangers != null) {
+                              if (localStorage.getItem("userSession") === undefined) {
                                     Swal.fire({
-                                          title: "Great!",
-                                          text: "Your flight was booking successfully",
-                                          icon: "success",
-                                          confirmButtonText: "Continue",
+                                          title: "Upps!",
+                                          text: "You are not logged in, please click on Start Button to continue",
+                                          icon: "info",
+                                          confirmButtonText: "Confirm",
                                     });
+                              } else {
+                                    const data = {
+                                          passangers: this.FlyOptions.passangers,
+                                          children: this.FlyOptions.boys
+                                                ? this.FlyOptions.boys
+                                                : 0,
+                                          total_payed: payed,
+                                          user_id: localStorage.getItem(
+                                                "userSession"
+                                          ),
+                                          flight_id: id,
+                                    };
+
+                                    const request = await axios.post(
+                                          `${import.meta.env.VITE_BACK_URI
+                                          }/booking/create`,
+                                          data
+                                    );
+
+                                    if (request.data.passangers != null) {
+                                          Swal.fire({
+                                                title: "Great!",
+                                                text: "Your flight was booking successfully",
+                                                icon: "success",
+                                                confirmButtonText: "Continue",
+                                          });
+                                    }
                               }
                         }
                   });

@@ -196,7 +196,7 @@ export default {
                   }).then(async (result) => {
                         if (result.isConfirmed) {
 
-                              if (localStorage.getItem("userSession") === undefined) {
+                              if (localStorage.getItem("userSession") == undefined) {
                                     Swal.fire({
                                           title: "Upps!",
                                           text: "You are not logged in, please click on Start Button to continue",
